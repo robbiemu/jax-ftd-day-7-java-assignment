@@ -82,7 +82,68 @@ public class ButterpillarSortingTest {
 	}
 
 	@Test
-	public void testCompare() {
+	public void testCompareEqual() throws InstantiationException, IllegalAccessException {
+		IButterpillar a = ButterpillarSortingTest.implementation.newInstance();		
+		IButterpillar b = ButterpillarSortingTest.implementation.newInstance();
+		
+		// test equality
+		a.setLength(1.0);
+		a.setLeavesEaten(20);
+		
+		b.setLength(1.0);
+		b.setLeavesEaten(20);
+		
+		Assert.assertEquals(0, a.compareTo(b));
+	}
+	
+	@Test
+	public void testCompareLessThan() throws InstantiationException, IllegalAccessException {
+		IButterpillar a = ButterpillarSortingTest.implementation.newInstance();		
+		IButterpillar b = ButterpillarSortingTest.implementation.newInstance();
+		
+		// test less-than
+		a.setLength(1.0);
+		a.setLeavesEaten(19);
+		
+		b.setLength(1.0);
+		b.setLeavesEaten(20);
+		
+		Assert.assertEquals(true, a.compareTo(b) < 0);
+		
+		a.setLength(0.9);
+		a.setLeavesEaten(25);
+		
+		b.setLength(1.0);
+		b.setLeavesEaten(20);
+		
+		Assert.assertEquals(true, a.compareTo(b) < 0);
+	}
+	
+	@Test
+	public void testCompareGreaterThan() throws InstantiationException, IllegalAccessException {
+		IButterpillar a = ButterpillarSortingTest.implementation.newInstance();		
+		IButterpillar b = ButterpillarSortingTest.implementation.newInstance();
+		
+		// test less-than
+		a.setLength(1.0);
+		a.setLeavesEaten(20);
+		
+		b.setLength(1.0);
+		b.setLeavesEaten(19);
+		
+		Assert.assertEquals(true, a.compareTo(b) > 0);
+		
+		a.setLength(1.0);
+		a.setLeavesEaten(20);
+		
+		b.setLength(0.9);
+		b.setLeavesEaten(25);
+		
+		Assert.assertEquals(true, a.compareTo(b) > 0);
+	}
+	
+	@Test
+	public void testComparableSort() {
 		List<IButterpillar> comparatorSorted = new ArrayList<>(this.butterpillars);
 		List<IButterpillar> comparableSorted = new ArrayList<>(this.butterpillars);
 
